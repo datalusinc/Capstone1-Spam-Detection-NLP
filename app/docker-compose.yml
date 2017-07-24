@@ -1,8 +1,20 @@
 version: "3"
+# networks:
+
 services:
   app:
     image: alexgian/python-spam-detector:base
     volumes:
       - .:/usr/src/app
-    entrypoint: python ./sb_cl_nlp_for_app.py
-    command: 'Hello world'
+    environment:
+      - FLASK_APP=server.py
+    command: flask run --host=0.0.0.0
+    # entrypoint: python ./sb_cl_nlp_for_app.py
+    # build: .
+    ports:
+      - 127.0.0.1:5000:5000
+    healthcheck:
+      test: wget -O- 127.0.0.1:5000
+      interval: 10s
+      timeout: 10s
+      retries: 5

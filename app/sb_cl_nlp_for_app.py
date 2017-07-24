@@ -36,10 +36,10 @@ warnings.filterwarnings(action='ignore', category=UserWarning, module='sklearn')
 # In[26]:
 
 # new_doc = ["I can probably do something this week? I am almos convinced on idea lol"]
-user_in = sys.argv[1] 
-# print( user_in )
-new_doc = [ user_in ]
-external_data = pd.DataFrame({'content':new_doc})
+# user_in = sys.argv[1] 
+# # print( user_in )
+# new_doc = [ user_in ]
+# external_data = pd.DataFrame({'content':new_doc})
 
 
 # In[27]:
@@ -196,14 +196,17 @@ else:
 # #### Execute user input
 
 # In[33]:
+def checkSpam(user_in):
+    # user_in = sys.argv[1] 
+    new_doc = [ user_in ]
+    external_data = pd.DataFrame({'content':new_doc})
+    predicted_external = predict_unseen(
+        new_doc_in=external_data,
+        stop_words_in = stopwords_set2,
+        symbols_to_remove = stopwords_set2,
+        trained_model_in = trained_model,y_given = False
+    )
+    return predicted_external[0]
 
-predicted_external = predict_unseen(
-    new_doc_in=external_data,
-    stop_words_in = stopwords_set2,
-    symbols_to_remove = stopwords_set2,
-    trained_model_in = trained_model,y_given = False
-)
-
-print({ 'result': predicted_external[0], 'input': user_in})
 
 # print json.dumps({"result": predicted_external[0], "input": user_in}, sort_keys=True, indent=4, separators=(',', ': '))
