@@ -1,4 +1,4 @@
-version: "3"
+version: "2.1"
 # networks:
 
 services:
@@ -12,9 +12,9 @@ services:
     # entrypoint: python ./sb_cl_nlp_for_app.py
     # build: .
     ports:
-      - 127.0.0.1:5000:5000
-    healthcheck:
-      test: wget -O- 127.0.0.1:5000
-      interval: 10s
-      timeout: 10s
-      retries: 5
+      - 5000:5000
+    # healthcheck:
+    #   test: wget -O- 127.0.0.1:5000
+    #   interval: 10s
+    #   timeout: 10s
+    #   retries: 5
